@@ -16,6 +16,9 @@
     "playlist",
     "copy"
   ],
+  "bin": {
+    "playlist-extractor": "bin/playlist-extractor"
+  },
   "author": "Nosthertus <nosthertus@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -23,6 +26,7 @@
   },
   "homepage": "https://github.com/Nosthertus/node-playlist-extractor#readme",
   "dependencies": {
-    "flutils": "^0.5.0"
+    "flutils": "^0.5.0",
+    "yargs": "^4.7.1"
   }
 }

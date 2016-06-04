@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+var fileModule = require("./../lib/File.js"),
+	argv	   = require("./../lib/argvs.js"),
+	fs		   = require("fs"),
+	utils	   = require("utils-pkg"),
+	path	   = require("path");
+
+var playlistDir  = argv.t;
+var outputFolder = argv.o;
+
+if(fileModule.fileExists(playlistDir)){
+	var music = fileModule.extract(playlistDir);
+
+	utils.each(music, function(index, dir, next){
+		var file   = path.parse(dir);
+		var output = path.join(outputFolder, file.base);
+
+
+		fs.createReadStream(dir)
+			.on("open", function(){
+				console.log("copying file:", dir);
+			})
+			.pipe(fs.createWriteStream(output)
+				.on("close", function(){
+					next();
+				})
+			);
+	});
+}
+
+else{
+	throw new Error("ERROR: " + playlistDir + " not accessible or does not exist");
+}
