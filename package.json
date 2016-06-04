@@ -1,5 +1,5 @@
 {
-  "name": "node-playlist-extractor",
+  "name": "playlist-extractor",
   "version": "0.2.0",
   "description": "Extract music files from playlist files such as m3u",
   "main": "index.js",
