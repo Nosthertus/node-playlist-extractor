@@ -2,6 +2,7 @@
 
 var fileModule = require("./../lib/File.js"),
 	argv	   = require("./../lib/argvs.js"),
+	stream     = require("./../lib/stream.js"),
 	fs		   = require("fs"),
 	utils	   = require("utils-pkg"),
 	path	   = require("path");
@@ -14,21 +15,16 @@ if(fileModule.fileExists(playlistDir)){
 
 	utils.each(music, function(index, dir, next){
 		var file   = path.parse(dir);
-		var output = path.join(outputFolder, file.base);
+		var output = path.join(argv.o, file.base);
 
-
-		fs.createReadStream(dir)
-			.on("open", function(){
-				console.log("copying file:", dir);
-			})
-			.pipe(fs.createWriteStream(output)
-				.on("close", function(){
-					next();
-				})
-			);
+		stream.copy(dir, output, function(){
+			next();
+		});
 	});
 }
 
 else{
-	throw new Error("ERROR: " + playlistDir + " not accessible or does not exist");
+	if(argv.v){
+		console.error(new Error(playlistDir + " not accessible or does not exist"));
+	}
 }
