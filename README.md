@@ -6,7 +6,7 @@ $ npm install playlist-extractor -g
 ```
 ## Usage
 ```bash
-playlist-extractor -t path/to/playlist -o path/to/directory
+playlist-extractor -t path/to/playlist.m3u -o path/to/directory
 ```
 ## Documentation
 **-t --target:** [String | Required]
@@ -14,6 +14,13 @@ File directory to playlist file
 
 **-o --output** [String | Required]
 Output directory folder to copy the files found from playlist
+
+**-v --verbose** [Boolean]
+Logs to the terminal the status of each step made
+
+**-f --filter** [Array]
+Filters the list of files found in the playlist, multiple values must be separated by spaces
+
 
 ## Contributing
 1. Fork it!
